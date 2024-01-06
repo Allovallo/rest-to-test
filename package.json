@@ -1,21 +1,21 @@
 {
-  "name": "parcel-pack",
+  "name": "rest-to-test",
   "version": "1.0.0",
-  "description": "parcel-pack",
+  "description": "rest-to-test",
   "scripts": {
     "start": "parcel src/*.html",
-    "build": "parcel build src/*.html --public-url /parcel-pack/"
+    "build": "parcel build src/*.html --public-url /rest-to-test/"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Allovallo/parcel-pack.git"
+    "url": "git+https://github.com/Allovallo/rest-to-test.git"
   },
   "author": "grossco",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/Allovallo/parcel-pack/issues"
+    "url": "https://github.com/Allovallo/rest-to-test/issues"
   },
-  "homepage": "https://github.com/Allovallo/parcel-pack#readme",
+  "homepage": "https://github.com/Allovallo/rest-to-test#readme",
   "devDependencies": {
     "parcel": "^2.11.0",
     "parcel-reporter-clean-dist": "^1.0.4",

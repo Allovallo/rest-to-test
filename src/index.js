@@ -1,3 +1,3 @@
 import './sass/index.scss';
 
-console.log('Aloha!');
+// console.log('Aloha!');

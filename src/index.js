@@ -8,6 +8,8 @@ const refs = {
 };
 const newsApiService = new NewsApiService();
 
+console.log(newsApiService);
+
 refs.searchForm.addEventListener('submit', onSearch);
 refs.loadMoreBtn.addEventListener('click', onLoadMore);
 
@@ -15,7 +17,7 @@ function onSearch(e) {
   e.preventDefault();
 
   newsApiService.query = e.currentTarget.elements.query.value;
-
+  newsApiService.resetPage();
   newsApiService.fetchArticles(searchQuery);
 }
 

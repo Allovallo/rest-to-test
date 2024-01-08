@@ -1,3 +1,4 @@
+import articlesTpl from './templates/articles.hbs';
 import './sass/index.scss';
 import NewsApiService from './js/components/news-servise';
 
@@ -8,7 +9,7 @@ const refs = {
 };
 const newsApiService = new NewsApiService();
 
-console.log(newsApiService);
+// console.log(newsApiService);
 
 refs.searchForm.addEventListener('submit', onSearch);
 refs.loadMoreBtn.addEventListener('click', onLoadMore);
@@ -18,9 +19,19 @@ function onSearch(e) {
 
   newsApiService.query = e.currentTarget.elements.query.value;
   newsApiService.resetPage();
-  newsApiService.fetchArticles(searchQuery);
+  newsApiService.fetchArticles().then(articles => {
+    clearArticlesContainer(), appendArticlesMarkup(articles);
+  });
 }
 
 function onLoadMore() {
-  newsApiService.fetchArticles(searchQuery);
+  newsApiService.fetchArticles().then(appendArticlesMarkup);
+}
+
+function appendArticlesMarkup(articles) {
+  refs.articleContainer.insertAdjacentHTML('beforeend', articlesTpl(articles));
+}
+
+function clearArticlesContainer() {
+  refs.articleContainer.innerHTML = '';
 }

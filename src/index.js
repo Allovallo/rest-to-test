@@ -1,16 +1,20 @@
 import articlesTpl from './templates/articles.hbs';
 import './sass/index.scss';
 import NewsApiService from './js/components/news-servise';
+import LoadMoreBtn from './js/components/loadmore-btn';
 
 const refs = {
   searchForm: document.querySelector('.js-search-form'),
   articleContainer: document.querySelector('.js-articles-container'),
-  loadMoreBtn: document.querySelector('[data-action="load-more"]'),
 };
+const loadMoreBtn = new LoadMoreBtn({
+  selector: '[data-action="load-more"]',
+  hidden: true,
+});
 const newsApiService = new NewsApiService();
 
 refs.searchForm.addEventListener('submit', onSearch);
-refs.loadMoreBtn.addEventListener('click', onLoadMore);
+loadMoreBtn.refs.button.addEventListener('click', fetchArticles);
 
 function onSearch(e) {
   e.preventDefault();
@@ -21,14 +25,18 @@ function onSearch(e) {
     return alert('Введеть щось нормальне!');
   }
 
+  loadMoreBtn.show();
   newsApiService.resetPage();
-  newsApiService.fetchArticles().then(articles => {
-    clearArticlesContainer(), appendArticlesMarkup(articles);
-  });
+  clearArticlesContainer();
+  fetchArticles();
 }
 
-function onLoadMore() {
-  newsApiService.fetchArticles().then(appendArticlesMarkup);
+function fetchArticles() {
+  loadMoreBtn.disable();
+  newsApiService.fetchArticles().then(articles => {
+    appendArticlesMarkup(articles);
+    loadMoreBtn.enable();
+  });
 }
 
 function appendArticlesMarkup(articles) {

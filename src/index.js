@@ -9,8 +9,6 @@ const refs = {
 };
 const newsApiService = new NewsApiService();
 
-// console.log(newsApiService);
-
 refs.searchForm.addEventListener('submit', onSearch);
 refs.loadMoreBtn.addEventListener('click', onLoadMore);
 
@@ -18,6 +16,11 @@ function onSearch(e) {
   e.preventDefault();
 
   newsApiService.query = e.currentTarget.elements.query.value;
+
+  if (newsApiService.query === '') {
+    return alert('Введеть щось нормальне!');
+  }
+
   newsApiService.resetPage();
   newsApiService.fetchArticles().then(articles => {
     clearArticlesContainer(), appendArticlesMarkup(articles);
